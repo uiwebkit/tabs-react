@@ -16,9 +16,9 @@ Check out our docs [here](https://uiwebkit.com/wgt/tabs/1/)
 
 #### Specify value for the tabs as JSON string
 
-```html
-<uni-tabs value='[{"label": "Tab 1"}, {"label": "Tab 2"}]'>
-  <uni-template hidden>
+```jsx
+<uni-tabs value={'[{"label": "Tab 1"}, {"label": "Tab 2"}]'}>
+  <uni-template hidden={true}>
     <div>Tab Content 1</div>
     <div>Tab Content 2</div>
   </uni-template>
@@ -27,10 +27,10 @@ Check out our docs [here](https://uiwebkit.com/wgt/tabs/1/)
 
 #### or specify url to the tabs JSON file (ex. tabs.json) or to the backend API endpoint
 
-```html
-<uni-event-load url="tabs.json" prop="value">
+```jsx
+<uni-event-load url={'tabs.json'} prop={'value'}>
   <uni-tabs>
-    <uni-template hidden>
+    <uni-template hidden={true}>
       <div>Tab 1 Content</div>
       <div>Tab 2 Content</div>
     </uni-template>
@@ -41,7 +41,7 @@ Check out our docs [here](https://uiwebkit.com/wgt/tabs/1/)
 #### Next-Gen Customization (with Store)
 
 ```jsx
-<uni-store-set path="tab.store" state="1"/>
+<uni-store-set path={'tab.store'} state={1}/>
 
 <uni-tabs>
   <uni-tab-bar mini={true}>
