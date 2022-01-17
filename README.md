@@ -9,7 +9,7 @@ Check out our docs [here](https://uiwebkit.com/wgt/tabs/1/)
 ### Add to index.html
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@uiwebkit/mat@2.0.0-6/dist/mat.esm.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@uiwebkit/mat@2.0.0-8/dist/mat.esm.js"></script>
 <script type="module" src="https://cdn.jsdelivr.net/npm/@uiwebkit/udk@2.0.0-20/dist/udk.esm.js"></script>
 <script type="module" src="https://cdn.jsdelivr.net/npm/@uiwebkit/tabs@1.0.0/dist/tabs/tabs.esm.js"></script>
 ```
