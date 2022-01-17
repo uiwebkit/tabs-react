@@ -4,7 +4,7 @@ function RouteTabs() {
     return (
         <Fragment>
             <uni-router shadow={true}/>
-            <uni-router-link activate={true} params="custom=1"/>
+            <uni-router-link activate={true} params={'custom=1'}/>
 
             <uni-tabs>
                 <uni-tab-bar mini={true}>

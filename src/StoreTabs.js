@@ -3,7 +3,7 @@ import {Fragment} from "react";
 function StoreTabs() {
     return (
         <Fragment>
-            <uni-store-set path="tab.store" state="1"/>
+            <uni-store-set path={'tab.store'} state={1}/>
 
             <uni-tabs>
                 <uni-tab-bar mini={true}>
