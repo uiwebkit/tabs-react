@@ -1,70 +1,136 @@
-# Getting Started with Create React App
+# Uni Tabs example for React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
 
-## Available Scripts
+Check out demo [here](https://uiwebkit.github.io/tabs-react/)
 
-In the project directory, you can run:
+Check out our docs [here](https://uiwebkit.com/wgt/tabs/1/)
 
-### `npm start`
+### Add to index.html
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/@uiwebkit/mat@2.0.0-6/dist/mat.esm.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@uiwebkit/udk@2.0.0-20/dist/udk.esm.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@uiwebkit/tabs@1.0.0/dist/tabs/tabs.esm.js"></script>
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### Specify value for the tabs as JSON string
 
-### `npm test`
+```html
+<uni-tabs value='[{"label": "Tab 1"}, {"label": "Tab 2"}]'>
+  <uni-template hidden>
+    <div>Tab Content 1</div>
+    <div>Tab Content 2</div>
+  </uni-template>
+</uni-tabs>
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### or specify url to the tabs JSON file (ex. tabs.json) or to the backend API endpoint
 
-### `npm run build`
+```html
+<uni-event-load url="tabs.json" prop="value">
+  <uni-tabs>
+    <uni-template hidden>
+      <div>Tab 1 Content</div>
+      <div>Tab 2 Content</div>
+    </uni-template>
+  </uni-tabs>
+</uni-event-load>
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Next-Gen Customization (with Store)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```jsx
+<uni-store-set path="tab.store" state="1"/>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<uni-tabs>
+  <uni-tab-bar mini={true}>
+    <uni-event-store-set listen={'click'} path={'tab.store'} state={0}>
+      <uni-event-store-get path={'tab.store'} equal={0} prop={'active'}>
+        <uni-tab 
+            value={'Tab 1'}
+            icon={'favorite'}
+            icon-type={'two-tone'}
+            angle={270}
+        />
+      </uni-event-store-get>
+    </uni-event-store-set>
 
-### `npm run eject`
+    <uni-event-store-set listen={'click'} path={'tab.store'} state={1}>
+      <uni-tab only={true}>
+        <uni-tab-content>
+          <uni-tab-icon icons="fa" type={'brands'} name={'font-awesome'}/>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+            <uni-tab-text-label>Tab 2</uni-tab-text-label>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+            <uni-event-store-get path="tab.store" equal={1} prop={'active'}>
+              <uni-tab-indicator/>
+            </uni-event-store-get>
+        </uni-tab-content>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+        <uni-tab-ripple/>
+      </uni-tab>
+    </uni-event-store-set>
+  </uni-tab-bar>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  <uni-store-display path={'tab.store'} equal={0} hidden={true}>
+    Tab 1 Content
+  </uni-store-display>
 
-## Learn More
+  <uni-store-display path={'tab.store'} equal={1} hidden={true}>
+    Tab 2 Content
+  </uni-store-display>
+</uni-tabs>
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Next-Gen Customization (with routes)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```jsx
+<uni-router shadow={true}/>
+<uni-router-link activate={true} params="custom=1"/>
 
-### Code Splitting
+<uni-tabs>
+  <uni-tab-bar>
+    <uni-router-link params={'custom=1'}>
+      <uni-route params={'custom=1'} prop={'active'}>
+        <uni-tab
+            value={'Tab 1'}
+            icon={'favorite'}
+            icon-type={'two-tone'}
+            angle={270}
+        />
+      </uni-route>
+    </uni-router-link>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    <uni-router-link params={'custom=2'}>
+      <uni-route params={'custom=2'} prop={'active'}>
+        <uni-tab only={true}>
+          <uni-tab-content>
+            <uni-tab-icon
+                icons={'fa'}
+                type={'brands'}
+                name={'font-awesome'}
+            />
 
-### Analyzing the Bundle Size
+            <uni-tab-text-label value={'Tab 2'}/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+            <uni-route params={'custom=2'} prop={'active'}>
+              <uni-tab-indicator/>
+            </uni-route>
+          </uni-tab-content>
 
-### Making a Progressive Web App
+          <uni-tab-ripple/>
+        </uni-tab>
+      </uni-route>
+    </uni-router-link>
+  </uni-tab-bar>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+  <uni-route-display params={'custom=1'} hidden={true}>
+    Tab 1 Content
+  </uni-route-display>
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  <uni-route-display params={'custom=2'} hidden={true}>
+    Tab 2 Content
+  </uni-route-display>
+</uni-tabs>
+```
